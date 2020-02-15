@@ -33,12 +33,12 @@ RSpec.describe "Calculator" do
       date_invest = Date.new(2020, 2, 8)
       date_qualifying = Date.new(2020, 6, 30)
       right_interest = (((5.to_f / 100) * 1000) / 366) * (date_qualifying - date_invest)
+      days = date_qualifying - date_invest
 
       interest = calculator.calc_interest(years: 0,
                                           interest: 5,
-                                          investment: 1000,
-                                          date_invest: date_invest,
-                                          date_qualifying: date_qualifying)
+                                          sum: 1000,
+                                          days: days)
 
       expect(interest).to be_within(0.00001).of(right_interest)
     end
