@@ -1,4 +1,4 @@
-require_relative 'calculation'
+require_relative 'calculator'
 require 'date'
 
   # Ich investiere zum 8. Februar 2020 den Betrag von 1000 Euro
