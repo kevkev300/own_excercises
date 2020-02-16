@@ -7,57 +7,73 @@ require 'date'
   # Welcher Betrag ist an den vier Stichtagen auszuzahlen?
 
 RSpec.describe "Calculator" do
-  describe '#daily_interest_rate' do
-    it 'calculates the right daily interest if leap-year' do
-      calculator = Calculator.new
-      date_invest = Date.new(2020, 2, 8)
-      right_interest = ((5.to_f / 100) * 1000) / 366
-
-      interest = calculator.daily_interest(1000, 5, date_invest)
-
-      expect(interest).to be_within(0.00001).of(right_interest)
-    end
-
-    it 'calculates the right daily interest if normal year' do
-      calculator = Calculator.new
-      date_invest = Date.new(2021, 2, 8)
-      right_interest = ((5.to_f / 100) * 1000) / 365
-
-      interest = calculator.daily_interest(1000, 5, date_invest)
-
-      expect(interest).to be_within(0.00001).of(right_interest)
-    end
-  end
-
-  describe '#calc_interest' do
-    it "works in leap-year years" do
+  describe '#calc' do
+    it 'works with 0 periods with first date_qualifying in the same year' do
       calculator = Calculator.new
       date_invest = Date.new(2020, 2, 8)
       date_qualifying = Date.new(2020, 6, 30)
-      right_interest = (((5.to_f / 100) * 1000) / 366) * (date_qualifying - date_invest)
-      days = date_qualifying - date_invest
+      sum = 1000
+      interest = 5
+      periods = 0
 
-      interest = calculator.calc_interest(years: 0,
-                                          interest: 5,
-                                          sum: 1000,
-                                          days: days)
+      solution = calculator.calc(date_invest: date_invest,
+                                 date_qualifying: date_qualifying,
+                                 periods: periods,
+                                 sum: sum,
+                                 interest_rate: interest)
 
-      expect(interest).to be_within(0.00001).of(right_interest)
+      expect(solution).to eq([1019.54])
     end
 
-    it "works in  normal year years" do
+    it 'works with 1 periods first date_qualifying in the same year' do
       calculator = Calculator.new
-      date_invest = Date.new(2021, 2, 8)
-      date_qualifying = Date.new(2021, 6, 30)
-      right_interest = (((5.to_f / 100) * 1000) / 365) * (date_qualifying - date_invest)
+      date_invest = Date.new(2020, 2, 8)
+      date_qualifying = Date.new(2020, 6, 30)
+      sum = 1000
+      interest = 5
+      periods = 1
 
-      interest = calculator.calc_interest(years: 0,
-                                          date_invest: 5,
-                                          investment: 1000,
-                                          date_invest: date_invest,
-                                          date_qualifying: date_qualifying)
+      solution = calculator.calc(date_invest: date_invest,
+                                 date_qualifying: date_qualifying,
+                                 periods: periods,
+                                 sum: sum,
+                                 interest_rate: interest)
 
-      expect(interest).to be_within(0.00001).of(right_interest)
+      expect(solution).to eq([519.54, 525])
+    end
+
+    it 'works with 3 periods first date_qualifying in the same year' do
+      calculator = Calculator.new
+      date_invest = Date.new(2020, 2, 8)
+      date_qualifying = Date.new(2020, 6, 30)
+      sum = 1000
+      interest = 5
+      periods = 3
+
+      solution = calculator.calc(date_invest: date_invest,
+                                 date_qualifying: date_qualifying,
+                                 periods: periods,
+                                 sum: sum,
+                                 interest_rate: interest)
+
+      expect(solution).to eq([269.54, 287.5, 275, 262.5])
+    end
+
+    it 'works with 1 periods first date_qualifying in the next year' do
+      calculator = Calculator.new
+      date_invest = Date.new(2020, 6, 30)
+      date_qualifying = Date.new(2021, 1, 31)
+      sum = 1000
+      interest = 5
+      periods = 1
+
+      solution = calculator.calc(date_invest: date_invest,
+                                 date_qualifying: date_qualifying,
+                                 periods: periods,
+                                 sum: sum,
+                                 interest_rate: interest)
+
+      expect(solution).to eq([529.45, 525])
     end
   end
 end
