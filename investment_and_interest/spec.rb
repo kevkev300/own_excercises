@@ -10,68 +10,52 @@ RSpec.describe "Calculator" do
   describe '#calc' do
     it 'works with 0 periods with first date_qualifying in the same year' do
       calculator = Calculator.new
-      date_invest = Date.new(2020, 2, 8)
-      date_qualifying = Date.new(2020, 6, 30)
-      sum = 1000
-      interest = 5
       periods = 0
 
-      solution = calculator.calc(date_invest: date_invest,
-                                 date_qualifying: date_qualifying,
-                                 periods: periods,
-                                 sum: sum,
-                                 interest_rate: interest)
+      solution = calculator.calc(date_invest: Date.new(2020, 2, 8),
+                                 date_qualifying: Date.new(2020, 6, 30),
+                                 sum: 1000,
+                                 interest_rate: 5,
+                                 periods: periods)
 
       expect(solution).to eq([1019.54])
     end
 
     it 'works with 1 periods first date_qualifying in the same year' do
       calculator = Calculator.new
-      date_invest = Date.new(2020, 2, 8)
-      date_qualifying = Date.new(2020, 6, 30)
-      sum = 1000
-      interest = 5
       periods = 1
 
-      solution = calculator.calc(date_invest: date_invest,
-                                 date_qualifying: date_qualifying,
-                                 periods: periods,
-                                 sum: sum,
-                                 interest_rate: interest)
+      solution = calculator.calc(date_invest: Date.new(2020, 2, 8),
+                                 date_qualifying: Date.new(2020, 6, 30),
+                                 sum: 1000,
+                                 interest_rate: 5,
+                                 periods: periods)
 
       expect(solution).to eq([519.54, 525])
     end
 
     it 'works with 3 periods first date_qualifying in the same year' do
       calculator = Calculator.new
-      date_invest = Date.new(2020, 2, 8)
-      date_qualifying = Date.new(2020, 6, 30)
-      sum = 1000
-      interest = 5
       periods = 3
 
-      solution = calculator.calc(date_invest: date_invest,
-                                 date_qualifying: date_qualifying,
-                                 periods: periods,
-                                 sum: sum,
-                                 interest_rate: interest)
+      solution = calculator.calc(date_invest: Date.new(2020, 2, 8),
+                                 date_qualifying: Date.new(2020, 6, 30),
+                                 sum: 1000,
+                                 interest_rate: 5,
+                                 periods: periods)
 
       expect(solution).to eq([269.54, 287.5, 275, 262.5])
     end
 
     it 'works with 1 periods first date_qualifying in the next year' do
       calculator = Calculator.new
-      date_invest = Date.new(2020, 6, 30)
-      date_qualifying = Date.new(2021, 1, 31)
-      sum = 1000
-      interest = 5
       periods = 1
 
-      solution = calculator.calc(date_invest: date_invest,
-                                 date_qualifying: date_qualifying,
-                                 periods: periods,
-                                 sum: sum,
-                                 interest_rate: interest)
+      solution = calculator.calc(date_invest: Date.new(2020, 6, 30),
+                                 date_qualifying: Date.new(2021, 1, 31),
+                                 sum: 1000,
+                                 interest_rate: 5,
+                                 periods: periods)
 
       expect(solution).to eq([529.45, 525])
     end
