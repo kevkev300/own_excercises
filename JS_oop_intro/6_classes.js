@@ -31,6 +31,7 @@ class Book {
 // instantiate Object
 const book1 = new Book('Book One', 'John Doe', 2013);
 
+console.log(typeof book1);
 console.log(book1);
 console.log(book1.getSummary());
 book1.revise(2019);
