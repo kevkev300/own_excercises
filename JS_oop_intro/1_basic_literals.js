@@ -1,3 +1,4 @@
+// ES5
 // object literal
 const book1 = {
   title: 'Book One',

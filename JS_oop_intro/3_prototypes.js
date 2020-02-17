@@ -1,3 +1,4 @@
+// ES5
 // Constructor
 // !!! arrow function and const don't work
 function Book(title, author, year) {
