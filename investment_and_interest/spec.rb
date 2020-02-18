@@ -60,4 +60,25 @@ RSpec.describe "Calculator" do
       expect(solution).to eq([529.45, 525])
     end
   end
+
+  describe '#daily_interest_rate' do
+    it 'calculates the right daily interest if leap-year' do
+      calculator = Calculator.new
+      date = Date.new(2020, 2, 8)
+
+      right_interest = ((5.to_f / 100) * 1000) / 366
+      interest = calculator.daily_interest(1000, 5, date)
+
+      expect(interest).to be_within(0.00001).of(right_interest)
+    end
+    it 'calculates the right daily interest if normal year' do
+      calculator = Calculator.new
+      date = Date.new(2021, 2, 8)
+
+      right_interest = ((5.to_f / 100) * 1000) / 365
+      interest = calculator.daily_interest(1000, 5, date)
+
+      expect(interest).to be_within(0.00001).of(right_interest)
+    end
+  end
 end
